@@ -1,4 +1,4 @@
-/hosts.yml
+hosts.yml
 vars/private.yml
 
 # User-specific files
