@@ -1,6 +1,6 @@
 # jokocide/iac
 
-Ansible playbook for my tiny home server.
+An Ansible playbook for my tiny home server.
 
 ## Usage
 
