@@ -1,4 +1,3 @@
-homebridge_container_name: "homebridge"
 juice_box_packages:
   - docker
   - samba
