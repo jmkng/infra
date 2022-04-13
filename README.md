@@ -16,9 +16,20 @@ Clone the repository:
 git clone https://github.com/jokocide/iac
 ```
 
-Inject Ansible Vault key:
+Create a hosts file:
 
 ```
-cd iac/
-echo YOUR_VAULT_KEY > .key
+vim hosts.yml
+
+# Example:
+# cat hosts_example.yml
+```
+
+Create private variables: 
+
+```
+vim vars/private.yml
+
+# Example:
+# cat vars/private_example.yml
 ```
