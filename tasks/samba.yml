@@ -1,0 +1,23 @@
+- name: Create public directory.
+  file:
+    state: "directory"
+    path : "/home/public"
+    mode: "777"
+
+- name: Update /etc/samba/smb.conf
+  blockinfile:
+    dest: /etc/samba/smb.conf
+    insertafter: "EOF"
+    block: |
+      [public]
+      path=/home/public
+      create mask=0777
+      directory mask=0777
+      public=yes
+      guest ok=yes
+      read only=no
+
+- name: Restart smbd service
+  service:
+    name: "smbd"
+    enabled: "yes"

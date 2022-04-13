@@ -1,0 +1,9 @@
+- name: Update system
+  apt:
+    update_cache: yes
+    upgrade: yes
+
+- name: Install common packages
+  package:
+    name: "{{ common_packages }}"
+    state: latest

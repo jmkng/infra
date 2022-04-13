@@ -1,0 +1,21 @@
+- name: Check existing Homebridge configuration
+  stat: 
+    path: "/home/{{ username }}/homebridge"
+  register: dir_result
+
+- name: Clone private Homebridge configuration
+  when: not dir_result.stat.exists
+  git:
+    clone: true
+    repo: "https://{{ personal_access_token }}@github.com/jokocide/homebridge_config.git"
+    dest: "/home/{{ username }}/homebridge"
+
+- name: Start Homebridge container
+  community.docker.docker_container:
+    name: homebridge
+    image: "oznu/homebridge:ubuntu"
+    restart_policy: "unless-stopped"
+    state: "started"
+    volumes:
+      - "/home/{{ username }}/homebridge:/homebridge"
+    network_mode: "host"

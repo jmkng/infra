@@ -1,0 +1,10 @@
+all:
+  children:
+    servers:
+      hosts:
+        host-alias:
+          ansible_port: example_port
+          ansible_host: example_ip
+          ansible_user: example_user
+          ansible_connection: example_connection_type
+          ansible_ssh_private_key_file: example_absolute_path_to_ssh_private_key

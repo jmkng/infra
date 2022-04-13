@@ -1,0 +1,53 @@
+- name: Configure SSH
+  hosts: all
+  become: yes
+  tasks:
+    - import_tasks: tasks/ssh.yml
+
+- name: Set environment
+  hosts: all
+  become: yes
+  tasks:
+    - import_tasks: tasks/environment.yml
+
+- name: Update and install common packages
+  hosts: all
+  become: yes
+  tasks:
+    - import_tasks: tasks/software.yml
+
+- name: Provision juice-box (1/2)
+  hosts: juice-box
+  become: yes
+  tasks:
+    - package:
+        name: "{{ juice_box_packages }}"
+        state: latest
+
+- name: Provision juice-box (2/2)
+  hosts: juice-box
+  become: yes
+  tasks:
+    pip:
+      name: docker
+
+- name: Samba initialization
+  hosts: juice-box
+  become: yes
+  tasks:
+    - import_tasks: tasks/samba.yml
+
+- name: Enable Docker service
+  hosts: juice-box
+  become: yes
+  tasks:
+    - systemd:
+      name: "docker"
+      state: "started"
+      enabled: true
+
+- Start Docker containers
+  hosts: juice-box
+  become: no
+  tasks:
+    - import_tasks: tasks/docker.yml
