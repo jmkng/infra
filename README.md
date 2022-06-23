@@ -4,7 +4,7 @@ Automatic infrastructure for my home.
 
 ## Usage
 
-You will need an Ansible [https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#control-node-requirements](control node.)
+You will need an Ansible [control node.](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#control-node-requirements)
 
 Clone the repository:
 
