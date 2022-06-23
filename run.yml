@@ -16,38 +16,38 @@
   tasks:
     - import_tasks: tasks/software.yml
 
-- name: Provision juice-box (1/2)
-  hosts: juice-box
+- name: Provision pi (1/2)
+  hosts: pi
   become: yes
   tasks:
     - package:
-        name: "{{ juice_box_packages }}"
+        name: "{{ pi_packages }}"
         state: latest
 
-- name: Provision juice-box (2/2)
-  hosts: juice-box
+- name: Provision pi (2/2)
+  hosts: pi
   become: yes
   tasks:
-    pip:
-      name: docker
+    - pip:
+        name: docker
 
 - name: Samba initialization
-  hosts: juice-box
+  hosts: pi
   become: yes
   tasks:
     - import_tasks: tasks/samba.yml
 
 - name: Enable Docker service
-  hosts: juice-box
+  hosts: pi
   become: yes
   tasks:
     - systemd:
-      name: "docker"
-      state: "started"
-      enabled: true
+        name: "docker"
+        state: "started"
+        enabled: true
 
-- Start Docker containers
-  hosts: juice-box
+- name: Start Docker containers
+  hosts: pi
   become: no
   tasks:
     - import_tasks: tasks/docker.yml
