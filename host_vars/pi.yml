@@ -1,0 +1,6 @@
+pi_packages:
+  - docker
+  - samba
+  - samba-common-bin
+  - python3
+  - python3-pip
