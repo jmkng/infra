@@ -1,4 +1,4 @@
-pi_packages:
+pi_software:
   - docker
   - samba
   - samba-common-bin

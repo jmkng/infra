@@ -1,0 +1,9 @@
+- name: Check existing Homebrew installation
+  stat:
+    path: "/usr/local/bin/brew"
+  register: a
+
+- name: Install Homebrew
+  when: not a.stat.exists
+  shell:
+    cmd: yes | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"

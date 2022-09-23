@@ -1,0 +1,99 @@
+- name: Configure SSH
+  hosts: servers
+  become: yes
+  tasks:
+    - import_tasks: tasks/ssh.yml
+
+- name: Disable PAM
+  hosts: air
+  become: yes
+  tasks:
+    - lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: "^#UsePAM yes"
+        line: "UsePAM no"
+
+- name: Set environment
+  hosts: all
+  become: yes
+  tasks:
+    - lineinfile:
+        dest: /etc/environment
+        create: true
+        regexp: "^EDITOR="
+        line: "EDITOR=vim"
+        insertafter: "EOF"
+
+- name: Update
+  hosts: pi
+  become: yes
+  tasks:
+    - apt:
+        update_cache: yes
+        upgrade: yes
+
+- name: Install common software
+  hosts: all
+  become: yes
+  tasks:
+    - package:
+        name: "{{ common_software }}"
+        state: latest
+
+- name: Install software (pi) 1/2
+  hosts: pi
+  become: yes
+  tasks:
+    - package:
+        name: "{{ pi_software }}"
+        state: latest
+
+- name: Install software (pi) 2/2
+  hosts: pi
+  become: no
+  tasks:
+    - pip:
+        name: docker
+
+- name: Install software (air) 1/2
+  hosts: air
+  become: no
+  tasks:
+    - import_tasks: tasks/software/homebrew.yml
+
+- name: Install software (air) 2/2
+  hosts: air
+  become: no
+  tasks:
+    - homebrew:
+        name: homebrew/cask/docker
+        update_homebrew: yes
+        upgrade_all: yes
+
+- name: Wait for Docker Desktop launch
+  tasks:
+    - pause:
+        prompt: "Verify that Docker Desktop is running."
+
+- name: Samba initialization
+  hosts: pi
+  become: yes
+  tasks:
+    - import_tasks: tasks/samba.yml
+
+# Enable on all servers.
+- name: Enable Docker service
+  hosts: pi
+  become: yes
+  tasks:
+    - systemd:
+        name: "docker"
+        state: "started"
+        enabled: true
+
+# Start Plex container
+- name: Start Docker containers
+  hosts: pi
+  become: no
+  tasks:
+    - import_tasks: tasks/software/docker/homebridge.yml

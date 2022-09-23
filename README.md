@@ -1,15 +1,25 @@
-# jokocide/iac
+# jokocide/infra
 
 Automatic infrastructure for my home.
 
 ## Usage
 
-You will need an Ansible [control node.](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#control-node-requirements)
-
-Clone the repository:
+Clone the repository on your Ansible [control node.](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#control-node-requirements):
 
 ```
 git clone https://github.com/jokocide/iac
+```
+
+Verify that the community.general collection is available.
+
+```
+ansible-galaxy collection list
+```
+
+If it is not, install it.
+
+```
+ansible-galaxy collection install community.general
 ```
 
 The repository contains files with names in the format of "subject_example.yml" and should be replaced with files that are named identically, but without the example.

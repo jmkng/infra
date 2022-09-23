@@ -1,7 +1,0 @@
-- name: Set environment
-  lineinfile:
-    dest: /etc/environment
-    create: true
-    regexp: "^EDITOR="
-    line: "EDITOR=vim"
-    insertafter: "EOF"

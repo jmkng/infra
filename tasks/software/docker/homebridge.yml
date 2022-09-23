@@ -1,13 +1,13 @@
 - name: Check existing Homebridge configuration
   stat: 
     path: "/home/{{ username }}/homebridge"
-  register: dir_result
+  register: a
 
 - name: Clone private Homebridge configuration
-  when: not dir_result.stat.exists
+  when: not a.stat.exists
   git:
     clone: true
-    repo: "https://{{ personal_access_token }}@github.com/jokocide/homebridge_config.git"
+    repo: "https://{{ personal_access_token }}@github.com/jokocide/homebridge.git"
     dest: "/home/{{ username }}/homebridge"
 
 - name: Start Homebridge container
