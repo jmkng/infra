@@ -1,4 +1,4 @@
-# jokocide/infra
+# infra
 
 Automatic infrastructure for my home.
 
