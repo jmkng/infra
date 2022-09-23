@@ -1,4 +1,4 @@
-# infra
+# Infra
 
 Automatic infrastructure for my home.
 
