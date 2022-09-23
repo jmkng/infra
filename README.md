@@ -1,6 +1,6 @@
 # Infra
 
-Automatic infrastructure for my home.
+Ansible infrastructure for my home.
 
 ## Usage
 
