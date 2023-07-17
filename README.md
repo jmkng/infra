@@ -4,12 +4,6 @@ Automatic infrastructure for my home.
 
 You will need an Ansible [control node.](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#control-node-requirements)
 
-Clone the repository:
-
-```
-git clone https://github.com/jokocide/iac
-```
-
 The repository contains files with names in the format of "subject_example.yml" and should be replaced with files that are named identically, but without the example.
 
 For example, hosts_example.yml should be hosts.yml. The example files contain data that can be copied over and modified.
