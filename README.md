@@ -1,5 +1,3 @@
-# jokocide/iac
-
 Automatic infrastructure for my home.
 
 ## Usage
